@@ -26,7 +26,7 @@ typedef struct stack{
 
         Description : Get a new stack object for performing operations
         
-        Arguments : <None>
+        Arguments : *None*
         
         Return Value : Stack*
 
@@ -42,4 +42,46 @@ typedef struct stack{
             1. Stack * : Pointer to the stack object where the data needs to be stored
             2. void *  : Pointer to the data object
 
-        Return value : <None>
+        Return value : *None*
+
+    * Function : **pop**(*Stack`*`*)
+
+        Description : Remove the top-most element from the stack.
+
+        Arguments : 
+
+            1. Stack * : Pointer to the stack object 
+
+        Return value : *void`*`* 
+            Pointer to the topmost element of the stack
+            If the stack is empty the return value would be NULL
+
+    * Function : **getSize**(*Stack`*`*)
+
+        Description : Get the number of elements currently in the stack
+
+        Arguments : 
+
+            1. Stack * : Pointer to the stack object 
+
+        Return value : *int* - Size of the stack as integer
+
+    * Function : **copyStack**(*Stack`*`*)
+
+        Description : Copy contents of the arguments stack onto another stack
+
+        Arguments : 
+
+            1. Stack * : Pointer to the stack object 
+
+        Return value : *Stack* - Returns the copied stack
+
+    * Function : **reverseStack**(*Stack`*`*)
+
+        Description : Reverse the contents of the arguments stack onto another stack (not in place)
+
+        Arguments : 
+
+            1. Stack * : Pointer to the stack object 
+
+        Return value : *Stack* - Returns the reversed stack
