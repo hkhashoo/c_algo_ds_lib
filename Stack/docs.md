@@ -44,6 +44,8 @@ typedef struct stack{
 
         Return value : *None*
 
+
+
     * Function : **pop**(*Stack`*`*)
 
         Description : Remove the top-most element from the stack.
@@ -56,6 +58,8 @@ typedef struct stack{
             Pointer to the topmost element of the stack
             If the stack is empty the return value would be NULL
 
+
+
     * Function : **getSize**(*Stack`*`*)
 
         Description : Get the number of elements currently in the stack
@@ -66,6 +70,8 @@ typedef struct stack{
 
         Return value : *int* - Size of the stack as integer
 
+
+
     * Function : **copyStack**(*Stack`*`*)
 
         Description : Copy contents of the arguments stack onto another stack
@@ -75,6 +81,8 @@ typedef struct stack{
             1. Stack * : Pointer to the stack object 
 
         Return value : *Stack* - Returns the copied stack
+
+
 
     * Function : **reverseStack**(*Stack`*`*)
 
