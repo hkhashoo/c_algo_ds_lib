@@ -44,7 +44,7 @@ typedef struct stack{
 
         Return value : *None*
 
-
+    <br/><br/>
 
     * Function : **pop**(*Stack`*`*)
 
@@ -58,7 +58,7 @@ typedef struct stack{
             Pointer to the topmost element of the stack
             If the stack is empty the return value would be NULL
 
-
+    <br/><br/>
 
     * Function : **getSize**(*Stack`*`*)
 
@@ -70,7 +70,7 @@ typedef struct stack{
 
         Return value : *int* - Size of the stack as integer
 
-
+    <br/><br/>
 
     * Function : **copyStack**(*Stack`*`*)
 
@@ -82,7 +82,7 @@ typedef struct stack{
 
         Return value : *Stack* - Returns the copied stack
 
-
+    <br/><br/>
 
     * Function : **reverseStack**(*Stack`*`*)
 
@@ -93,3 +93,5 @@ typedef struct stack{
             1. Stack * : Pointer to the stack object 
 
         Return value : *Stack* - Returns the reversed stack
+    
+    <br/><br/>
