@@ -80,7 +80,7 @@ typedef struct stack{
 
             1. Stack * : Pointer to the stack object 
 
-        Return value : *Stack* - Returns the copied stack
+        Return value : *Stack`*`* - Returns the copied stack
 
     <br/><br/>
 
@@ -92,6 +92,6 @@ typedef struct stack{
 
             1. Stack * : Pointer to the stack object 
 
-        Return value : *Stack* - Returns the reversed stack
+        Return value : *Stack`*`* - Returns the reversed stack
     
     <br/><br/>
