@@ -25,7 +25,9 @@ typedef struct stack{
     * Function : **newStack**()
 
         Description : Get a new stack object for performing operations
+        
         Arguments : <None>
+        
         Return Value : Stack*
 
     
@@ -34,6 +36,7 @@ typedef struct stack{
     * Function : **push**(*Stack`*`*, *void*)
 
         Description : Push a value to a stack object.
+
         Arguments : 
 
             1. Stack * : Pointer to the stack object where the data needs to be stored
