@@ -6,7 +6,7 @@ The implementation of structure is as follows :
 
 * Container for void pointer
 
-typedef struct List{
+typedef struct StackContainer{
 	void* data;
 	struct List *next;
 }List; 

@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define new(x) (x*)calloc(sizeof(x), 1)
-typedef struct List{
+typedef struct StackContainer{
 	void* data;
-	struct List *next;
-}List;
+	struct StackContainer *next;
+}StackContainer;
 
 typedef struct stack{
-	struct List *top;
+	struct StackContainer *top;
 	int size;
 }Stack;
 
@@ -17,7 +17,7 @@ Stack* newStack(){
 }
 
 void push(Stack *stack, void *data){ //O(1) time
-	struct List *newNode = new(List);
+	struct StackContainer *newNode = new(StackContainer);
 	newNode->data = data;
 	newNode->next = NULL;
 	
@@ -36,7 +36,7 @@ void push(Stack *stack, void *data){ //O(1) time
 void* pop(Stack *stack){ //O(1) time
 	
 	if(stack->top){
-		struct List *fNode = stack->top;
+		struct StackContainer *fNode = stack->top;
 		void* data = fNode->data;
 		stack->top = stack->top->next;
 		free(fNode);
@@ -51,7 +51,7 @@ void* pop(Stack *stack){ //O(1) time
 Stack* reverseStack(Stack *stack ){ //O(n) time
 	if(stack){
 		Stack *s1 = newStack();
-		List *iterator = stack->top;
+		StackContainer *iterator = stack->top;
 		
 		while(iterator){
 			push(s1, iterator->data);
@@ -66,7 +66,7 @@ Stack* reverseStack(Stack *stack ){ //O(n) time
 	
 }
 
-void copyHelper(Stack *stack , List *iterator){
+void copyHelper(Stack *stack , StackContainer *iterator){
 	if(iterator != NULL){
 		copyHelper(stack, iterator->next);
 		push(stack,iterator->data);
