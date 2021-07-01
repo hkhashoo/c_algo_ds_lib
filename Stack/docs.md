@@ -33,7 +33,7 @@ typedef struct stack{
     
 2. Stack Operations
 
-    * Function : **push**(*Stack`*`*, *void*)
+    * Function : **push**(*Stack`*`*, *void`*`*)
 
         Description : Push a value to a stack object.
 

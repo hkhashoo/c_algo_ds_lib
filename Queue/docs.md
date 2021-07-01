@@ -35,7 +35,7 @@ typedef struct Queue{
     
 2. Stack Operations
 
-    * Function : **enQueue**(*Queue`*`*, *void*)
+    * Function : **enQueue**(*Queue`*`*, *void`*`*)
 
         Description : Add an element to the rear end of the queue.
 
