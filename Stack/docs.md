@@ -60,6 +60,20 @@ typedef struct stack{
 
     <br/><br/>
 
+    * Function : **peek**(*Stack`*`*)
+
+        Description : Get the top-most element from the stack without removing it
+
+        Arguments : 
+
+            1. Stack * : Pointer to the stack object 
+
+        Return value : *void`*`* 
+            Pointer to the topmost element of the stack
+            If the stack is empty the return value would be NULL
+
+    <br/><br/>
+
     * Function : **getSize**(*Stack`*`*)
 
         Description : Get the number of elements currently in the stack

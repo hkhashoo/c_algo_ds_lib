@@ -39,6 +39,13 @@ void* pop(Stack *stack){ //O(1) time
 	
 }
 
+void* peek(Stack *stack){
+
+	if(stack->top) return stack->top->data;
+
+	else return NULL;
+}
+
 Stack* reverseStack(Stack *stack ){ //O(n) time
 	if(stack){
 		Stack *s1 = newStack();

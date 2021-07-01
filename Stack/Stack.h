@@ -12,6 +12,7 @@ typedef struct stack{
 Stack* newStack();
 void push(Stack *stack, void *data);
 void* pop(Stack *stack);
+void* peek(Stack *stack);
 Stack* reverseStack(Stack *stack );
 Stack* copyStack(Stack *stack);
 int getSize(Stack *stack);
