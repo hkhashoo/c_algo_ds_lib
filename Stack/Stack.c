@@ -1,15 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define new(x) (x*)calloc(sizeof(x), 1)
-typedef struct StackContainer{
-	void* data;
-	struct StackContainer *next;
-}StackContainer;
-
-typedef struct stack{
-	struct StackContainer *top;
-	int size;
-}Stack;
+#include "Stack.h"
 
 Stack* newStack(){
 	Stack *stack = new(Stack);
