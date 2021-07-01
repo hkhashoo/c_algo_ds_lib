@@ -1,33 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define new(x) (x*) calloc(sizeof(x), 1);
-typedef struct list{
-	void* data;
-	struct list *next;
-}List;
-
-typedef struct Queue{
-	List * rear;
-	int length;
-}Queue;
+#include "queue.h"
 
 Queue* newQueue(){
-	Queue *queue = new(Queue);
+	Queue *queue = new(Queue); //return a null queue object
 	return queue;
 }
 
 void enQueue(Queue* queue, void *data){
 	
-	List *newNode = new(List);
+	QueueContainer *newNode = new(QueueContainer);
 	newNode->data = data;
 	
 	if(queue->rear == NULL) //First insertion to the queue
 	{
 		queue->rear = newNode;
+		queue->front = newNode; 
 	}
 	
 	else{
 		newNode->next = queue->rear;
+		queue->rear->prev = newNode;
 		queue->rear = newNode;
 	}
 	
@@ -35,29 +28,36 @@ void enQueue(Queue* queue, void *data){
 }
 
 void* deQueue(Queue *queue){
-	List *fValue = queue->rear;
-	List *pValue = NULL;
+	QueueContainer *fValue = queue->front;
 	void *rValue = NULL;
 	
-	if(fValue){
-		while(fValue->next){
-			pValue = fValue;
-			fValue = fValue->next;
-		}
+	if(fValue) // If the queue does have an element left to dequeue
+	{
 		rValue = fValue->data;
+
+		if(fValue->prev == NULL) // Only one element is left in the queue
+		{
+			queue->front = NULL;
+			queue->rear = NULL;
+		}
+
+		else{
+			queue->front->prev->next = NULL;
+			queue->front = queue->front->prev;
+		}
+
+		queue->length -=1;
 	}
-	if(pValue){
-		pValue->next = NULL;
-		queue->length--;
-	}
-		
-	else{
-		queue->rear = NULL;
-		queue->length = 0;
-	}
+
 	
 	free(fValue);
 	return rValue;
+}
+
+void* seeQueue(Queue *queue){
+	if(queue->front) return queue->front->data;
+
+	else return NULL;
 }
 
 int noQueue(Queue* queue){
@@ -69,26 +69,29 @@ int queueLength(Queue* queue){
 }
 
 Queue* reverseQueue(Queue* queue){
-	
-	if(queue == NULL){
-		printf("NULL QUEUE\n");
-		return NULL;
-	}
-	Queue *newQ = newQueue();
-	List *iterator = queue->rear;
-	
+
+	Queue *reversequeue = newQueue();
+
+	QueueContainer* iterator = queue->rear;
+
 	while(iterator){
-		enQueue(newQ, iterator->data);
+		enQueue(reversequeue, iterator->data);
 		iterator = iterator->next;
 	}
-	
-	return newQ;
+
+	return reversequeue;
 }
 
 Queue* copyQueue(Queue* queue){
 	
-	Queue * q1 = reverseQueue(queue);
-	q1 = reverseQueue(q1);
-	
-	return q1;
+	Queue * copyqueue = newQueue();
+
+	QueueContainer* iterator = queue->front;
+
+	while(iterator){
+		enQueue(copyqueue, iterator->data);
+		iterator = iterator->prev;
+	}
+
+	return copyqueue;
 }
