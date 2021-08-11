@@ -3,8 +3,11 @@
 
 typedef struct BinaryTree{
 	void * data;
-	struct Tree *left;
-	struct Tree *right;
+	struct BinaryTree *left;
+	struct BinaryTree *right;
 }BinaryTree;
 
-BinaryTree* newTree(int, ...);
+BinaryTree* newBinaryTree(int, ...);
+void preOrder(BinaryTree*, void (*f)(void*));
+void inOrder(BinaryTree*, void (*f)(void*));
+void postOrder(BinaryTree*, void (*f)(void*));
