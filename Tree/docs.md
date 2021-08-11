@@ -21,6 +21,7 @@ typedef struct BinaryTree{
         Description : Get a new binary tree object for performing operations. This function will insert elements to the tree
         
         Arguments : 
+        
             1. int : Number of elements to initially insert to the tree
             2. ... : Generic pointers to elements to insert
         
