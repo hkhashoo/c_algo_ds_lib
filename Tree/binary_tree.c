@@ -27,18 +27,47 @@ BinaryTree* newBinaryTree(int elements, ...){
             if(elements){ // there are more elements to be pushed left.
                 elements--;
                 right = va_arg(ap, void*);
-                parent->left = calloc(sizeof(BinaryTree),1);
-                parent->right = calloc(sizeof(BinaryTree), 1);
-                parent->left->data = left;
-                parent->right->data = right;
-                enQueue(queue, parent->left);
-                enQueue(queue, parent->right);
+                if(left){
+                    parent->left = calloc(sizeof(BinaryTree),1);
+                    parent->left->data = left;
+                    enQueue(queue, parent->left);
+                }
+
+                else{
+                    parent->left = NULL;
+                    elements++;
+                }
+
+                if(right){
+                    parent->right = calloc(sizeof(BinaryTree), 1);
+                    parent->right->data = right;
+                    enQueue(queue, parent->right);
+                }
+
+                else{
+                    parent->right = NULL;
+                    elements++;
+                }
             }
 
             else{
-                parent->left = calloc(sizeof(BinaryTree), 1);
-                parent->left->data = left;
-                break;
+                if(left){
+                    parent->left = calloc(sizeof(BinaryTree), 1);
+                    parent->left->data = left;
+                    
+                }
+
+                else{
+                    right = va_arg(ap, void*);
+                    if(right){
+                        parent->right = calloc(sizeof(BinaryTree), 1);
+                        parent->right->data = right;
+                    }
+
+                    else{
+                        elements++;
+                    }
+                }
             }
         }
     }
@@ -69,4 +98,96 @@ void postOrder(BinaryTree *root, void (*print)(void*)){
         postOrder(root->right, print);
         print(root->data);
     }
+}
+
+int height(BinaryTree* root){
+
+    if(root == NULL) return 0;
+
+    Queue *queue = newQueue();
+    BinaryTree *parent;
+    int height = 0;
+    int length = 1, added;
+    enQueue(queue, root);
+
+    while(length){
+        added = 0;
+        while(length--){
+            parent = deQueue(queue);
+            if(parent->left) {
+                enQueue(queue, parent->left);
+                added++;
+            }
+            if(parent->right){
+                enQueue(queue, parent->right);
+                added++;
+            } 
+        }
+
+        length = added;
+        height++;
+    }
+
+    return height;
+}
+
+void* getData(BinaryTree* root){
+    
+    if(!root) return NULL;
+
+    return root->data;
+}
+
+BinaryTree* getLeft(BinaryTree *root){
+    
+    if(!root) return NULL;
+
+    return root->left;
+}
+
+BinaryTree* getRight(BinaryTree* root){
+    
+    if(!root) return NULL;
+
+    return root->right;
+}
+
+int setData(BinaryTree*root, void *data){
+    if(!root) return 0;
+
+    else root->data = data;
+
+    return 1;
+}
+
+int setLeft(BinaryTree* root, void *data){
+    
+    if(!root) return 0;
+
+    if(root->left){
+        root->left->data = data;
+    }
+
+    else{
+        root->left = calloc(sizeof(BinaryTree), 1);
+        root->left->data = data;
+    }
+
+    return 1;
+}
+
+int setRight(BinaryTree* root, void *data){
+    
+    if(!root) return 0;
+    
+    if(root->right){
+        root->right->data = data;
+    }
+
+    else{
+        root->right = calloc(sizeof(BinaryTree), 1);
+        root->right->data = data;
+    }
+
+    return 1;
 }
