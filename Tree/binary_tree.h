@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-typedef struct Tree{
+typedef struct BinaryTree{
 	void * data;
 	struct Tree *left;
 	struct Tree *right;
-}
+}BinaryTree;
 
-void newTree(void*, ...);
+BinaryTree* newTree(int, ...);
