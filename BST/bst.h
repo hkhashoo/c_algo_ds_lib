@@ -8,4 +8,6 @@ typedef struct BST {
 } BST;
 
 BST* newBST(int (*)(void*, void*), int, ...);
-void inorder(BST*, void (*)(void*));
+void inOrder(BST*, void (*)(void*));
+void preOrder(BST*, void (*)(void*));
+void postOrder(BST*, void (*)(void*));

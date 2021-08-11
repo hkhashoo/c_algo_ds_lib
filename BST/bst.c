@@ -1,14 +1,30 @@
 #include "bst.h"
 
-void inorder(BST *root, void (*myPrint)(void*)) {
+void inOrder(BST *root, void (*myPrint)(void*)) {
     if(root != NULL) {
-        inorder(root->left, myPrint);
+        inOrder(root->left, myPrint);
         myPrint(root->data);
-        inorder(root->right, myPrint);
+        inOrder(root->right, myPrint);
     }
 }
 
-BST* newBST(int (*myCompare)(void*, void*), int elements, ...) {
+void postOrder(BST *root, void (*myPrint)(void*)) {
+    if(root != NULL) {
+        postOrder(root->left, myPrint);
+        postOrder(root->right, myPrint);
+        myPrint(root->data);
+    }
+}
+
+void preOrder(BST *root, void (*myPrint)(void*)) {
+    if(root != NULL) {
+        myPrint(root->data);
+        preOrder(root->left, myPrint);
+        preOrder(root->right, myPrint);
+    }
+}
+
+BST *newBST(int (*myCompare)(void*, void*), int elements, ...) {
     BST *root = NULL;
     void *val;
     va_list ap;
