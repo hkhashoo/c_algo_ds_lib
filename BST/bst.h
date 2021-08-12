@@ -14,4 +14,4 @@ void inOrder(BST*, void (*)(void*));
 void preOrder(BST*, void (*)(void*));
 void postOrder(BST*, void (*)(void*));
 void insertOne(int (*)(void*, void*), void (*)(BST*, void*), BST*, void*);
-void insertMany(int (*)(void*, void*), void (*)(BST*, void*), int, ...);
+void insertMany(int (*)(void*, void*), void (*)(BST*, void*), BST*, int, ...);

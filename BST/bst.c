@@ -1,4 +1,5 @@
 #include "bst.h"
+#include <stdio.h>
 
 void inOrder(BST *root, void (*myPrint)(void*)) {
     if(root != NULL) {
@@ -63,8 +64,25 @@ BST *newBST(int(*myCompare)(void*, void*), void(*setData)(BST*, void*), int elem
 }
 
 void insertOne(int(*myCompare)(void*, void*), void(*setData)(BST*, void*), BST *root, void *data) {
-    BST *newNode = malloc(sizeof(BST));
-    setData(newNode, data);
+    if(root != NULL) {
+        BST *newNode = malloc(sizeof(BST));
+        setData(newNode, data);
 
-    insertion(myCompare, root, data);
+        insertion(myCompare, root, data);
+    } else printf("ERR - root not assigned");
+}
+
+void insertMany(int(*myCompare)(void*, void*), void (*setData)(BST*, void*), BST *root, int elements, ...) {
+    if(root != NULL) {
+        void *val;
+        va_list ap;
+
+        va_start(ap, elements);
+
+        while(elements--) {
+            val = va_arg(ap, void*);
+
+            insertOne(myCompare, setData, root, val);
+        }
+    } else printf("ERR - root not assigned");
 }
