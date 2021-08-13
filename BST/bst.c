@@ -1,5 +1,4 @@
 #include "bst.h"
-#include <stdio.h>
 
 void inOrder(BST *root, void (*myPrint)(void*)) {
     if(root != NULL) {
@@ -40,7 +39,7 @@ BST* getParent(int(*myCompare)(void*, void*), BST *root, BST *valNode) {
 
 void insertion(int(*myCompare)(void*, void*), BST *root, void *val) {
     BST *newNode = malloc(sizeof(BST));
-    setData(newNode, val);
+    newNode->data = val;
     newNode->left = NULL;
     newNode->right = NULL;
 
@@ -50,7 +49,7 @@ void insertion(int(*myCompare)(void*, void*), BST *root, void *val) {
     else prev->left = newNode;
 }
 
-BST *newBST(int(*myCompare)(void*, void*), void(*setData)(BST*, void*), int elements, ...) {
+BST *newBST(int(*myCompare)(void*, void*), int elements, ...) {
     BST *root = NULL;
     void *val;
     va_list ap;
@@ -62,7 +61,7 @@ BST *newBST(int(*myCompare)(void*, void*), void(*setData)(BST*, void*), int elem
 
         if(root == NULL) {
             root = malloc(sizeof(BST));
-            setData(root, val);
+            root->data = val;
             root->right = NULL;
             root->left = NULL;
         } else insertion(myCompare, root, val);
@@ -70,35 +69,34 @@ BST *newBST(int(*myCompare)(void*, void*), void(*setData)(BST*, void*), int elem
     return root;
 }
 
-int insertOne(int(*myCompare)(void*, void*), void(*setData)(BST*, void*), BST *root, void *data) {
+int insertOne(int(*myCompare)(void*, void*), BST *root, void *data) {
     /*
     returns 1 for successful insertion, 0 for unsuccessful insertion;
     */
     if(root != NULL) {
-        BST *newNode = malloc(sizeof(BST));
-        setData(newNode, data);
-
         insertion(myCompare, root, data);
         return 1;
     } else return 0;
 }
 
-int insertMany(int(*myCompare)(void*, void*), void(*setData)(BST*, void*), BST *root, int elements, ...) {
+int insertMany(int(*myCompare)(void*, void*), BST *root, int elements, ...) {
     /*
-    returns 1 for successful insertion, 0 for unsuccessful insertion;
+    returns number of successful insertions, 0 for unsuccessful insertion;
     */
    if(root != NULL) {
         void *val;
         va_list ap;
+        int count = 0;
 
         va_start(ap, elements);
 
         while(elements--) {
             val = va_arg(ap, void*);
 
-            insertOne(myCompare, setData, root, val);
-        } 
-        return 1;
+            insertOne(myCompare, root, val);
+            count++;
+        }
+        return count;
     } else return 0;
 }
 
