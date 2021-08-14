@@ -8,4 +8,13 @@ typedef struct BST {
 } BST;
 
 BST* newBST(int (*)(void*, void*), int, ...);
-void inorder(BST*, void (*)(void*));
+void insertion (int (*)(void*, void*), BST*, void*);
+void inOrder(BST*, void (*)(void*));
+void preOrder(BST*, void (*)(void*));
+void postOrder(BST*, void (*)(void*));
+int insertOne(int (*)(void*, void*), BST*, void*);
+int insertMany(int (*)(void*, void*), BST*, int, ...);
+BST* search(int (*)(void*, void*), BST*, void*);
+BST* delete(int (*)(void*, void*), BST*, void*);
+BST* getParent(int (*)(void*, void*), BST*, BST*);
+BST* inOrderSuccessor(BST*);
