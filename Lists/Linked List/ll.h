@@ -9,6 +9,9 @@ typedef struct LL {
 LL* newLL(int, ...);
 void insertion(LL*, void*);
 //LL* getParent(LL*, LL*);
-int deleteKeys(int (*)(void*, void*), LL*, int, ...);
-int delete(int (*)(void*, void*), LL*, void*);
+int deleteKeys(int (*)(void*, void*), LL**, int, ...);
+int delete(int (*)(void*, void*), LL**, void*);
+int deleteIndex(int (*)(void*, void*), LL**, int, ...);
 int keyCount(int (*)(void*, void*), LL*, void*);
+int length(LL*);
+int deleteLL(LL**);

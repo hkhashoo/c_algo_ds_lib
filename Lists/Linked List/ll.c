@@ -1,15 +1,5 @@
 #include "ll.h"
 
-/*LL* getParent(int(*myCompare)(void*, void*), LL *head, LL *newNode) {
-    LL *temp = head;
-    LL *prev;
-
-    while(temp != newNode && temp != NULL) {
-        prev = temp;
-        temp = temp->next;
-    }
-}*/
-
 LL* newLL(int elements, ...) {
     /*
     insertion of multiple elements in the list;
@@ -33,6 +23,9 @@ LL* newLL(int elements, ...) {
 }
 
 void insertion(LL *head, void *val) {
+    /*
+    insertion of a single element into the Linked List;
+    */
     LL *temp = head;
     LL *newNode = malloc(sizeof(LL));
     
@@ -43,21 +36,23 @@ void insertion(LL *head, void *val) {
     temp->next = newNode;
 }
 
-int deleteKeys(int(*myCompare)(void*, void*), LL *head, int elements, ...) {
+int deleteKeys(int(*myCompare)(void*, void*), LL **head, int elements, ...) {
+    if(*head == NULL) return 0;
     /*
     deletes all occurances of the given elements and returns number of nodes deleted successfully;
     */
-    if(head == NULL) return 0;
+    if(*head == NULL) return 0;
     
     void *val;
     va_list ap;
     int count = 0;
-    int kc = keyCount(myCompare, head, val);
 
     va_start(ap, elements);
 
     while(elements--) {
         val = va_arg(ap, void*);
+        int kc = keyCount(myCompare, *head, val);
+        
         while(kc--) {
             if(delete(myCompare, head, val)) count++;
         }
@@ -65,13 +60,13 @@ int deleteKeys(int(*myCompare)(void*, void*), LL *head, int elements, ...) {
     return count;
 }
 
-int delete(int(*myCompare)(void*, void*), LL *head, void *val) {
-    LL *temp = head;
+int delete(int(*myCompare)(void*, void*), LL **head, void *val) {
+    if(*head == NULL) return 0;
 
-    if(!myCompare(head->data, val)) {
-        head = temp->next;
-        temp->next = NULL;
-    } else {
+    LL *temp = *head;
+
+    if(!myCompare((*head)->data, val)) *head = temp->next;
+    else {
         LL *prev;
 
         while(myCompare(temp->data, val)) {
@@ -100,4 +95,81 @@ int keyCount(int (*myCompare)(void*, void*), LL *head, void *val) {
         temp = temp->next;
     }
     return count;
+}
+
+int length(LL *head) {
+    /*
+    returns length of the list, 0 for head == NULL;
+    */
+    LL *temp = head;
+    int len = 0;
+
+    while(temp != NULL) {
+        temp = temp->next;
+        len++;
+    }
+    return len;
+}
+
+int deleteIndex(int(*myCompare)(void*, void*), LL **head, int elements, ...) {
+    if(*head == NULL) return 0;
+    /*
+    deletes the nodes at a particular index and returns the number of deleted nodes;
+    NOTE : follows 0 based indexing;
+    */
+    int val;
+    va_list ap;
+    int count = 0;
+    int len = length(*head);
+
+    va_start(ap, elements);
+
+    while(elements--) {
+        val = va_arg(ap, int);
+
+        if(val < len) {
+            LL *temp = *head;
+
+            if(!val) *head = temp->next;
+            else {
+                LL *prev;
+                
+                while(val--) {
+                    prev = temp;
+                    temp = temp->next;
+                }
+                prev->next = temp->next;
+                temp->next = NULL;
+            }
+            free(temp);
+            count++;
+        }
+    }
+    return count;
+}
+
+int deleteLL(LL **head) {
+    if(*head == NULL) return 0;
+    /*
+    deletes the Linked List and returns the number of elements deleted.
+    */
+    int count = 0;
+    
+    while((*head)->next != NULL) {    
+        LL *temp = *head;
+        
+        while(temp->next->next != NULL) temp = temp->next;
+        
+        if(temp->next == NULL) {
+            free(temp);
+            (*head)->next = NULL;
+        } else {
+            free(temp->next);
+            temp->next = NULL;
+            count++;
+        }
+    }
+    free(*head);
+    
+    return ++count;
 }
