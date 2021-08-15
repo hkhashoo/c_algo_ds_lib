@@ -71,3 +71,78 @@ typedef struct BinaryTree{
         Return value : *None*
 
     <br/><br/>
+
+    * Function : **void`*`** getData(*BinaryTree`*`*)
+
+        Description : Gets the data of the node pointed by the argument node.
+
+        Arguments : 
+
+            1. Binary Tree * : Pointer to the binary tree object 
+
+        Return value : *void`*`* Returns the void* address stored in the tree node.
+
+    <br/><br/>
+
+    * Function : **BinaryTree`*`** getLeft(*BinaryTree`*`*)
+
+        Description : Gets the left subtree of the node pointed by the argument node.
+
+        Arguments : 
+
+            1. Binary Tree * : Pointer to the binary tree object 
+
+        Return value : *BinaryTree`*`* Returns the root node of the left subtree. Returns NULL if left subtree is empty or root is empty.
+
+    <br/><br/>
+
+    * Function : **BinaryTree`*`** getRight(*BinaryTree`*`*)
+
+        Description : Gets the right subtree of the node pointed by the argument node.
+
+        Arguments : 
+
+            1. Binary Tree * : Pointer to the binary tree object 
+
+        Return value : *BinaryTree`*`* Returns the root node of the right subtree. Returns NULL if left subtree is empty or root is empty.
+
+    <br/><br/>
+
+    * Function : **int`*`** setData(*BinaryTree`*`*, *void`*`*)
+
+        Description : Sets the value of data for the node pointed by the argument node.
+
+        Arguments : 
+
+            1. Binary Tree * : Pointer to the binary tree object 
+            2. void* : Pointer to the generic type which needs to be fed in as data for the argument node.
+
+        Return value : *int`*`* Returns the status of the set. Operation fails if argument node is NULL.
+
+    <br/><br/>
+
+    * Function : **int`*`** setLeft(*BinaryTree`*`*, *void`*`*)
+
+        Description : Sets the value of data for the root of the left subtree of the node pointed by the argument node.
+
+        Arguments : 
+
+            1. Binary Tree * : Pointer to the binary tree object 
+            2. void* : Pointer to the generic type which needs to be fed in as data for the argument node.
+
+        Return value : *int`*`* Returns the status of the set. Operation fails if argument node is NULL or its left subtree is NULL.
+
+    <br/><br/>
+
+    * Function : **int`*`** setData(*BinaryTree`*`*, *void`*`*)
+
+        Description : Sets the value of data for the root of the right subtree of the node pointed by the argument node.
+
+        Arguments : 
+
+            1. Binary Tree * : Pointer to the binary tree object 
+            2. void* : Pointer to the generic type which needs to be fed in as data for the argument node.
+
+        Return value : *int`*`* Returns the status of the set. Operation fails if argument node is NULL or its right subtree is NULL.
+
+    <br/><br/>
