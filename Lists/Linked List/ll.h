@@ -15,3 +15,4 @@ int deleteIndex(int (*)(void*, void*), LL**, int, ...);
 int keyCount(int (*)(void*, void*), LL*, void*);
 int length(LL*);
 int deleteLL(LL**);
+LL* search(int (*)(void*, void*), LL*, void*);

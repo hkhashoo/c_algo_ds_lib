@@ -169,7 +169,11 @@ int deleteLL(LL **head) {
             count++;
         }
     }
-    free(*head);
+    *head = NULL;
     
     return ++count;
+}
+
+LL* search(int (*myCompare)(void *, void *), LL *head, void *val) {
+    if(head == NULL) return NULL;
 }
