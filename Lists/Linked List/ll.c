@@ -184,11 +184,6 @@ LL* search(int(*myCompare)(void*, void*), LL *head, void *val) {
     return temp;
 }
 
-void printArr(LL** arr, int size){
-    for(int i=0; i<size; i++) printf("%d ", arr[i]->data);
-    printf("\n");
-}
-
 LL **merge(int(*myCompare)(void*, void*), LL **arr, int alen, LL **brr, int blen) {
 
     LL **crr = malloc((alen + blen) * sizeof(LL*));
