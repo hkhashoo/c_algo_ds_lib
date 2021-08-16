@@ -83,7 +83,7 @@ int delete(int(*myCompare)(void*, void*), LL **head, void *val) {
     return 1;
 }
 
-int keyCount(int (*myCompare)(void*, void*), LL *head, void *val) {
+int keyCount(int(*myCompare)(void*, void*), LL *head, void *val) {
     /*
     returns the numbers of occurances of a key in the list;
     */
@@ -111,11 +111,11 @@ int length(LL *head) {
     return len;
 }
 
-int deleteIndex(int(*myCompare)(void*, void*), LL **head, int elements, ...) {
+int deleteIndex(LL **head, int elements, ...) {
     if(*head == NULL) return 0;
     /*
-    deletes the nodes at a particular index and returns the number of deleted nodes;
     NOTE : follows 0 based indexing;
+    deletes the nodes at a particular index and returns the number of deleted nodes;
     */
     int val;
     va_list ap;
@@ -174,6 +174,75 @@ int deleteLL(LL **head) {
     return ++count;
 }
 
-LL* search(int (*myCompare)(void *, void *), LL *head, void *val) {
-    if(head == NULL) return NULL;
+LL* search(int(*myCompare)(void*, void*), LL *head, void *val) {
+    /*
+    returns the pointer to the first instance of the given value, returns NULL if head is NULL or given value isn't found in the Linked List;
+    */
+    LL *temp = head;
+    while(temp != NULL && myCompare(temp->data, val)) temp = temp->next;
+
+    return temp;
+}
+
+void printArr(LL** arr, int size){
+    for(int i=0; i<size; i++) printf("%d ", arr[i]->data);
+    printf("\n");
+}
+
+LL **merge(int(*myCompare)(void*, void*), LL **arr, int alen, LL **brr, int blen) {
+
+    LL **crr = malloc((alen + blen) * sizeof(LL*));
+    int i = 0, j = 0, k = 0;
+    
+    while((i < alen) && (j < blen)) {
+        if(myCompare(arr[i]->data, brr[j]->data) == 1) crr[k++] = arr[i++];
+        else if(myCompare(arr[i]->data, brr[j]->data) == -1)crr[k++] = brr[j++];
+        else {
+            crr[k++] = brr[j++];
+            crr[k++] = arr[i++];
+        }
+    }
+    while(i < alen) crr[k++] = arr[i++];
+    while(j < blen) crr[k++] = brr[j++];
+
+    return crr;
+}
+
+LL **mergeSort(int(*myCompare)(void*, void*), LL **arr, int low, int high) {
+    
+    if(low == high) {
+        LL* *element = malloc(sizeof(LL*));
+        element[0] = arr[low];
+        return element;
+    }
+
+    else return merge(myCompare, mergeSort(myCompare, arr, low, (low + high)/2), ((low + high)/2)-low+1, mergeSort(myCompare, arr, ((low + high)/2)+1, high), high-(((low + high)/2)+1)+1);
+
+}
+
+void sort(int(*myCompare)(void*, void*), LL **head) {
+    if(*head == NULL) return;
+
+    int len = length(*head);
+    LL **arr = malloc(len * sizeof(LL*));
+    LL *temp = *head;
+    int i = 0;
+    
+    while(temp != NULL) {
+        arr[i++] = temp;
+        temp = temp->next;
+    }
+
+    arr = mergeSort(myCompare, arr, 0, len-1);
+    
+    *head = arr[0];
+    temp = *head;
+    i = 1;
+
+    while(i < len) {
+
+        temp->next = arr[i++];
+        temp = temp->next;
+    }
+    temp->next = NULL;
 }
