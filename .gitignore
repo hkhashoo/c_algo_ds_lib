@@ -1,4 +1,5 @@
 #ignore all executables
 *.exe
 *.out
+#ignore client side code files
 test.c
