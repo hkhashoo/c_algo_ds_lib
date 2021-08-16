@@ -204,18 +204,18 @@ LL **merge(int(*myCompare)(void*, void*), LL **arr, int alen, LL **brr, int blen
 }
 
 LL **mergeSort(int(*myCompare)(void*, void*), LL **arr, int low, int high) {
-    
     if(low == high) {
         LL* *element = malloc(sizeof(LL*));
         element[0] = arr[low];
         return element;
     }
-
     else return merge(myCompare, mergeSort(myCompare, arr, low, (low + high)/2), ((low + high)/2)-low+1, mergeSort(myCompare, arr, ((low + high)/2)+1, high), high-(((low + high)/2)+1)+1);
-
 }
 
 void sort(int(*myCompare)(void*, void*), LL **head) {
+    /*
+    sorts LL using merge sort algo, uses 2 utility functions `mergeSort` and `merge`, both defined above;
+    */
     if(*head == NULL) return;
 
     int len = length(*head);
@@ -240,4 +240,38 @@ void sort(int(*myCompare)(void*, void*), LL **head) {
         temp = temp->next;
     }
     temp->next = NULL;
+    return;
+}
+
+void reverse(LL **head) {
+    if(*head == NULL || (*head)->next == NULL) return;
+    /*
+    reverses the given LL;
+    */
+    LL *temp = *head;
+    LL *revHead;
+    LL *revTemp;
+
+    while(temp->next->next != NULL) temp = temp->next;
+    revHead = temp->next;
+    revTemp = revHead;
+    temp->next = NULL;
+
+    while((*head)->next != NULL) {
+        temp = (*head)->next;
+        while(temp->next != NULL && temp->next->next != NULL) temp = temp->next;
+
+        if(temp->next == NULL) {
+            revTemp->next = temp;
+            (*head)->next = NULL;
+        } else {
+            revTemp->next = temp->next;
+            temp->next = NULL;
+        }
+        revTemp = revTemp->next;
+    }
+    revTemp->next = *head;
+    revTemp->next->next = NULL;
+    *head = revHead;
+    return;
 }

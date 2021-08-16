@@ -16,3 +16,4 @@ int length(LL*);
 int deleteLL(LL**);
 LL* search(int (*)(void*, void*), LL*, void*);
 void sort(int (*)(void*, void*), LL**);
+void reverse(LL**);
