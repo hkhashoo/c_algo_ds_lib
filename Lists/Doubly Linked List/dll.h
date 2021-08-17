@@ -9,3 +9,7 @@ typedef struct DLL {
 
 DLL* newDLL(int, ...);
 void insertion(DLL*, void*);
+void insertFront(DLL**, void*);
+void deleteFront(DLL**);
+int deleteIndex(DLL**, int, ...);
+int length(DLL*);

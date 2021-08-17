@@ -125,7 +125,7 @@ int deleteIndex(LL **head, int elements, ...) {
     va_start(ap, elements);
 
     while(elements--) {
-        val = va_arg(ap, int);
+        val = va_arg(ap, int) - count;
 
         if(val < len) {
             LL *temp = *head;
