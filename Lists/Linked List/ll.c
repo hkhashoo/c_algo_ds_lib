@@ -40,9 +40,7 @@ int deleteKeys(int(*myCompare)(void*, void*), LL **head, int elements, ...) {
     if(*head == NULL) return 0;
     /*
     deletes all occurances of the given elements and returns number of nodes deleted successfully;
-    */
-    if(*head == NULL) return 0;
-    
+    */    
     void *val;
     va_list ap;
     int count = 0;
@@ -62,7 +60,9 @@ int deleteKeys(int(*myCompare)(void*, void*), LL **head, int elements, ...) {
 
 int delete(int(*myCompare)(void*, void*), LL **head, void *val) {
     if(*head == NULL) return 0;
-
+    /*
+    deletest the first occurance of a node with the given value;
+    */
     LL *temp = *head;
 
     if(!myCompare((*head)->data, val)) *head = temp->next;
@@ -71,10 +71,8 @@ int delete(int(*myCompare)(void*, void*), LL **head, void *val) {
 
         while(myCompare(temp->data, val)) {
             if(temp == NULL) return 0;
-            else {
-                prev = temp;
-                temp = temp->next;
-            }
+            prev = temp;
+            temp = temp->next;
         }
         prev->next = temp->next;
         temp->next = NULL;
