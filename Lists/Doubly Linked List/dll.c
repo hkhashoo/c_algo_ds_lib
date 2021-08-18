@@ -90,12 +90,11 @@ int deleteIndex(DLL **head, int elements, ...) {
             
             if(!val) *head = temp->next;
             else {
-                DLL *papa = temp;
-                
                 while(val--) {
-                    papa = temp;
                     temp = temp->next;
                 }
+                DLL *papa = temp->prev;
+
                 papa->next = temp->next;
                 if(temp->next != NULL) temp->next->prev = papa;
                 temp->next = NULL;
@@ -153,13 +152,12 @@ int delete(int(*myCompare)(void*, void*), DLL **head, void *val) {
 
     if(!myCompare((*head)->data, val)) *head = temp->next;
     else {
-        DLL *prev = temp;
-
         while(myCompare(temp->data, val)) {
             if(temp == NULL) return 0;
-            prev = temp;
             temp = temp->next;
         }
+        DLL *prev = temp->prev;
+        
         prev->next = temp->next;
         if(temp->next->prev != NULL) temp->next->prev = prev;
         temp->next = NULL;
@@ -178,4 +176,48 @@ DLL* search(int(*myCompare)(void*, void*), DLL *head, void *val) {
     
     while(temp != NULL && myCompare(temp->data, val)) temp = temp->next;
     return temp;
+}
+
+int deleteDLL(DLL **head) {
+    if(*head == NULL) return 0;
+    /*
+    deletes the entire DLL and returns the number of nodes deleted;
+    */    
+    int count = 0;
+    DLL *temp = *head;
+
+    while(temp->next != NULL) temp = temp->next;
+
+    while(temp != *head) {
+        DLL *prev = temp->prev;
+        
+        prev->next = NULL;
+        temp->prev = NULL;
+        free(temp);
+        temp = prev;
+        count++;
+    }
+    *head = NULL;
+    
+    return ++count;
+}
+
+void reverse(DLL **head) {
+    if(*head == NULL) return;
+    /* 
+    reverses the given DLL;
+    */
+    DLL *temp = *head;
+    
+    while(temp->next != NULL) temp = temp->next;
+    *head = temp;
+    DLL *prev = temp->prev;
+    
+    while(temp != NULL) {
+        temp->prev = temp->next;
+        temp->next = prev;
+        temp = prev;
+        if(temp != NULL) prev = temp->prev;
+    }
+    return;
 }

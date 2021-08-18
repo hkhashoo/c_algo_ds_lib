@@ -17,3 +17,5 @@ int deleteKeys(int (*)(void*, void*), DLL**, int, ...);
 int keyCount(int (*)(void*, void*), DLL*, void*);
 int delete(int (*)(void*, void*), DLL**, void*);
 DLL* search(int (*)(void*, void*), DLL*, void*);
+int deleteDLL(DLL**);
+void reverse(DLL**);
