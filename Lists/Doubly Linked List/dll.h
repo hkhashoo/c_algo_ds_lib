@@ -13,3 +13,7 @@ void insertFront(DLL**, void*);
 void deleteFront(DLL**);
 int deleteIndex(DLL**, int, ...);
 int length(DLL*);
+int deleteKeys(int (*)(void*, void*), DLL**, int, ...);
+int keyCount(int (*)(void*, void*), DLL*, void*);
+int delete(int (*)(void*, void*), DLL**, void*);
+DLL* search(int (*)(void*, void*), DLL*, void*);

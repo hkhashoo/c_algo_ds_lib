@@ -72,8 +72,8 @@ int length(DLL *head) {
 int deleteIndex(DLL **head, int elements, ...) {
     if(*head == NULL) return 0;
     /* 
-    NOTE:- zero based indexing is followed.
-    deletes the nodes at the given indices and returns the number of elements removed.
+    NOTE:- zero based indexing is followed;
+    deletes the nodes at the given indices and returns the number of elements removed;
     */
     va_list ap;
     int val;
@@ -97,7 +97,7 @@ int deleteIndex(DLL **head, int elements, ...) {
                     temp = temp->next;
                 }
                 papa->next = temp->next;
-                temp->prev = papa;
+                if(temp->next != NULL) temp->next->prev = papa;
                 temp->next = NULL;
                 temp->prev = NULL;
             }
@@ -106,4 +106,76 @@ int deleteIndex(DLL **head, int elements, ...) {
         }
     }
     return count;
+}
+
+int deleteKeys(int(*myCompare)(void*, void*), DLL **head, int elements, ...) {
+    if(*head == NULL) return 0;
+    /*
+    deletes all nodes with the given keys in them and returns number of nodes deleted successfully;
+    */
+    va_list ap;
+    void *val;
+    int count = 0;
+
+    va_start(ap, elements);
+
+    while(elements--) {
+        val = va_arg(ap, void*);
+        int kc = keyCount(myCompare, *head, val);
+        
+        while(kc--) {
+            if(delete(myCompare, head, val)) count++;
+        }
+    }
+    return count;
+}
+
+int keyCount(int(*myCompare)(void*, void*), DLL *head, void *val) {
+    /*
+    returns the number of elements with a given value;
+    */
+    DLL *temp = head;
+    int kc = 0;
+
+    while(temp != NULL) {
+        if(!myCompare(temp->data, val)) kc++;
+        temp = temp->next;
+    }
+    return kc;
+}
+
+int delete(int(*myCompare)(void*, void*), DLL **head, void *val) {
+    if(*head == NULL) return 0;
+    /*
+    deletest the first occurance of a node with the given value;
+    */
+    DLL *temp = *head;
+
+    if(!myCompare((*head)->data, val)) *head = temp->next;
+    else {
+        DLL *prev = temp;
+
+        while(myCompare(temp->data, val)) {
+            if(temp == NULL) return 0;
+            prev = temp;
+            temp = temp->next;
+        }
+        prev->next = temp->next;
+        if(temp->next->prev != NULL) temp->next->prev = prev;
+        temp->next = NULL;
+        temp->prev = NULL;
+    }
+    free(temp);
+    return 1;
+}
+
+DLL* search(int(*myCompare)(void*, void*), DLL *head, void *val) {
+    if(head == NULL) return NULL;
+    /*
+    checks for a given value in the list and returns a pointer to that node;
+    */
+    DLL *temp = head;
+    
+    while(temp != NULL && myCompare(temp->data, val)) temp = temp->next;
+    return temp;
 }
