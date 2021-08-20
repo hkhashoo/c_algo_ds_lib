@@ -2,7 +2,7 @@
 
 DLL* newDLL(int elements, ...) {
     /*
-    creates a new DLL with the given elements and returns the pointer to the head;
+    creates a new DLL with the given elements and returns the addess of the first node;
     */
     DLL *head = NULL;
     void *val;
