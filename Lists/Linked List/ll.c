@@ -211,11 +211,10 @@ LL **mergeSort(int(*myCompare)(void*, void*), LL **arr, int low, int high) {
 }
 
 void sort(int(*myCompare)(void*, void*), LL **head) {
+    if(*head == NULL) return;
     /*
     sorts LL using merge sort algo, uses 2 utility functions `mergeSort` and `merge`, both defined above;
     */
-    if(*head == NULL) return;
-
     int len = length(*head);
     LL **arr = malloc(len * sizeof(LL*));
     LL *temp = *head;
