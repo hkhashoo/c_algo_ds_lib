@@ -221,3 +221,63 @@ void reverse(DLL **head) {
     }
     return;
 }
+
+int partition(int(*myCompare)(void*, void*), DLL **arr, int low, int high) {
+    int i = low + 1, j = high;
+    
+    while(i < j) {
+        while(myCompare(arr[i]->data, arr[low]->data) != -1 && i <= high) i++;
+        while(myCompare(arr[j]->data, arr[low]->data) != 1 && j > low)  j--;
+
+        if(i < j) {
+            DLL *temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    if(j != low) {
+        DLL *temp = arr[j];
+        arr[j] = arr[low];
+        arr[low] = temp;
+    }
+    return j;
+}
+
+void quickSort(int(*myCompare)(void *, void *), DLL **arr, int low, int high) {
+    if(low < high) {
+        int j = partition(myCompare, arr, low, high);
+        quickSort(myCompare, arr, low, j-1);
+        quickSort(myCompare, arr, j+1, high);
+    }
+}
+
+void sort(int(*myCompare)(void*, void*), DLL **head) {
+    if(*head == NULL) return;
+    /*
+    sorts the given DLL;
+    */
+    int len = length(*head);
+    DLL **arr = malloc(len * sizeof(DLL*));
+    int i = 0;
+    DLL *temp = *head;
+
+    while(temp != NULL) {
+        arr[i++] = temp;
+        temp = temp->next;
+    }
+    quickSort(myCompare, arr, 0, len - 1);
+
+    *head = arr[0];
+    i = 1;
+    temp = *head;
+    temp->prev = NULL;
+
+    while(i < len) {
+        temp->next = arr[i];
+        temp = temp->next;
+        temp->prev = arr[i-1];
+        i++;
+    }
+    temp->next = NULL;
+    return;
+}

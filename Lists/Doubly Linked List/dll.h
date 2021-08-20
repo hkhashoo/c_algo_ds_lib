@@ -19,3 +19,4 @@ int delete(int (*)(void*, void*), DLL**, void*);
 DLL* search(int (*)(void*, void*), DLL*, void*);
 int deleteDLL(DLL**);
 void reverse(DLL**);
+void sort(int (*)(void*, void*), DLL**);
