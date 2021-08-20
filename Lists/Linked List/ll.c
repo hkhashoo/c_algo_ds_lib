@@ -23,6 +23,7 @@ LL* newLL(int elements, ...) {
 }
 
 void insertion(LL *head, void *val) {
+    if(head == NULL) return;
     /*
     insertion of a single element into the Linked List;
     */

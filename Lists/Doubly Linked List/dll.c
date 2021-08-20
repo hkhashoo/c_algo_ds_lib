@@ -24,6 +24,7 @@ DLL* newDLL(int elements, ...) {
 }
 
 void insertion(DLL *head, void *val) {
+    if(head == NULL) return;
     /*
     insertion of a single element in the DLL;
     */
