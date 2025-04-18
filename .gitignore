@@ -3,3 +3,5 @@
 *.out
 #ignore client side code files
 test.c
+#ignore IDE related files
+.vscode
