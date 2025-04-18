@@ -5,21 +5,22 @@
 The implementation of structure is as follows : 
 
 * Container for void pointer
-
+```
 typedef struct QueueContainer{
 	void* data;
 	struct QueueContainer *next;
 	struct QueueContainer *prev;
 }QueueContainer;
-
+```
+<br></br>
 * Stack structure
-
+```
 typedef struct Queue{
 	QueueContainer * rear;
 	QueueContainer *front;
 	int length;
 }Queue;
-
+```
 ### At no point does the library need you to instantiate these manually. There are functions for all necessary operations
 
 1. Getting a queue object

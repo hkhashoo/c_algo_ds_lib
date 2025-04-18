@@ -18,4 +18,4 @@ Queue* reverseQueue(Queue* queue);
 int queueLength(Queue* queue);
 int noQueue(Queue* queue);
 void* deQueue(Queue *queue);
-void *seeQeueu(Queue* queue);
+void *seeQueue(Queue* queue);

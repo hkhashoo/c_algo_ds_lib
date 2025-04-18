@@ -5,19 +5,20 @@
 The implementation of structure is as follows : 
 
 * Container for void pointer
-
-typedef struct StackContainer{
+```
+typedef struct StackContainer {
 	void* data;
 	struct List *next;
-}List; 
-
+} List; 
+```
+<br></br>
 * Stack structure
-
-typedef struct stack{
+```
+typedef struct stack {
 	struct List *top;
 	int size;
-}Stack; 
-
+} Stack; 
+```
 ### At no point does the library need you to instantiate these manually. There are functions for all necessary operations
 
 1. Getting a stack object

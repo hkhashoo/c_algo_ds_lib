@@ -18,8 +18,8 @@ typedef struct Node {
 * Stack structure
 ```
 typedef struct Queue{
-	QueueContainer * rear;
-	QueueContainer *front;
+	Node *rear;
+	Node *front;
 	int length;
 }Queue;
 ```
